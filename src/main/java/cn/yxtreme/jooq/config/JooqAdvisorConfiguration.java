@@ -112,6 +112,7 @@ public class JooqAdvisorConfiguration {
                     "`.____.'  `.___.'  `.___.'  `.___.\\__| |____| |____|'.__.;__] \\__/  [___][\\__) )'.__.' [___]    \n");
             System.out.println();
             System.out.println("version: 1.0.4");
+            System.out.println("see more detail to https://github.com/Alex07221/jooq-advisor/tree/master");
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
 
