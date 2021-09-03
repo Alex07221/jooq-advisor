@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5f652cd5-df53-4f58-ba8a-f8ab41ac8689" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FoldableProjectSettings">
+    <option name="FOLDING_ENABLED" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\Program Files\apache-maven-3.8.1-bin\apache-maven-3.8.1\res" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../Program Files/apache-maven-3.8.1-bin/apache-maven-3.8.1" />
+        <option name="userSettingsFile" value="C:\Program Files\apache-maven-3.8.1-bin\apache-maven-3.8.1\conf\application.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1wZeiNsE0viUtriQ0kvw8qXCggq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/cn/yxtreme/jooq/config" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="showLigatures" value="false" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\project\jooq-advisor\src\main\java\cn\yxtreme\jooq\config" />
+      <recent name="C:\project\jooq-advisor\src\main\java\cn\yxtreme\jooq" />
+      <recent name="C:\project\jooq-advisor\src\main\java\cn\yxtreme\jooq\generate" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.yxtreme.jooq.utils" />
+      <recent name="cn.yxtreme.jooq.model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.JooqAdvisorConfiguration">
+    <configuration name="JooqAdvisorConfiguration" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.yxtreme.jooq.config.JooqAdvisorConfiguration" />
+      <module name="jooq-advisor" />
+      <option name="PROGRAM_PARAMETERS" value="app.verion = @project.version@" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.yxtreme.jooq.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="jooq-advisor [deploy]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="deploy" />
+                <option value="-X" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="jooq-advisor [deploy:deploy]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="deploy:deploy" />
+                <option value="-X" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="jooq-advisor [jooq-codegen:generate]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="jooq-codegen:generate" />
+                <option value="-X" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.JooqAdvisorConfiguration" />
+      <item itemvalue="Maven.jooq-advisor [deploy]" />
+      <item itemvalue="Maven.jooq-advisor [deploy:deploy]" />
+      <item itemvalue="Maven.jooq-advisor [jooq-codegen:generate]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Maven.jooq-advisor [jooq-codegen:generate]" />
+        <item itemvalue="Maven.jooq-advisor [deploy:deploy]" />
+        <item itemvalue="Maven.jooq-advisor [deploy]" />
+        <item itemvalue="Application.JooqAdvisorConfiguration" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f652cd5-df53-4f58-ba8a-f8ab41ac8689" name="Changes" comment="" />
+      <created>1628670663869</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1628670663869</updated>
+      <workItem from="1628670665102" duration="7391000" />
+      <workItem from="1628734668079" duration="10485000" />
+      <workItem from="1628751813141" duration="1174000" />
+      <workItem from="1628753083906" duration="4746000" />
+      <workItem from="1628822210494" duration="92000" />
+      <workItem from="1628825910114" duration="2638000" />
+      <workItem from="1628833904501" duration="228000" />
+      <workItem from="1628834317280" duration="2052000" />
+      <workItem from="1629080383455" duration="2411000" />
+      <workItem from="1629094483775" duration="601000" />
+      <workItem from="1629787960874" duration="1162000" />
+      <workItem from="1630463611929" duration="27000" />
+      <workItem from="1630463938653" duration="2459000" />
+      <workItem from="1630466940062" duration="419000" />
+      <workItem from="1630467422066" duration="81000" />
+      <workItem from="1630467605530" duration="38000" />
+      <workItem from="1630468034958" duration="290000" />
+      <workItem from="1630468346893" duration="2152000" />
+      <workItem from="1630475285792" duration="1936000" />
+      <workItem from="1630486944002" duration="1728000" />
+      <workItem from="1630548490078" duration="39000" />
+      <workItem from="1630654750007" duration="11000" />
+      <workItem from="1630654938481" duration="358000" />
+      <workItem from="1630655440009" duration="2158000" />
+      <workItem from="1630657724363" duration="79000" />
+      <workItem from="1630657835642" duration="363000" />
+      <workItem from="1630658260405" duration="229000" />
+      <workItem from="1630658499715" duration="174000" />
+      <workItem from="1630658701011" duration="14000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../Program Files/apache-maven-3.8.1-bin/apache-maven-3.8.1/res/org/jooq/jooq-codegen/3.15.1/jooq-codegen-3.15.1.jar!/org/jooq/codegen/JavaGenerator.class</url>
+          <line>6577</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
