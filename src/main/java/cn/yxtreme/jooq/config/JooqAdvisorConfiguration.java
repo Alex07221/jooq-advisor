@@ -20,7 +20,9 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author: xuZeBiao
@@ -55,10 +57,9 @@ public class JooqAdvisorConfiguration {
         executorProvider.ifAvailable(configuration::set);
 
 
-        var visits = Arrays.stream(visitListenerProviders.orderedStream().toArray((x$0) -> new VisitListenerProvider[x$0])).collect(Collectors.toSet());
-        var executes = Arrays.stream(executeListenerProviders.orderedStream().toArray((x$0) -> new ExecuteListenerProvider[x$0])).collect(Collectors.toSet());
-        var records = Arrays.stream(recordListenerProviders.orderedStream().toArray((x$0) -> new RecordListenerProvider[x$0])).collect(Collectors.toSet());
-
+        var visits = visitListenerProviders.orderedStream().collect(Collectors.toSet());
+        var executes =executeListenerProviders.orderedStream().collect(Collectors.toSet());
+        var records = recordListenerProviders.orderedStream().collect(Collectors.toSet());
 
         var fieldConfig = ((Class<? extends BaseFieldConfig>) JooqAdvisorProperties.properties.get("fieldClass")).getConstructor().newInstance();
         var tablesClass = (Class<?>) JooqAdvisorProperties.properties.get("tablesClass");
@@ -96,10 +97,11 @@ public class JooqAdvisorConfiguration {
             }
         }
 
+
         configuration.set(ArrayUtil.toArray(visits, VisitListenerProvider.class));
         configuration.set(ArrayUtil.toArray(executes, ExecuteListenerProvider.class));
         configuration.set(ArrayUtil.toArray(records, RecordListenerProvider.class));
-        configuration.setTransactionListenerProvider(transactionListenerProviders.orderedStream().toArray((x$0) -> new TransactionListenerProvider[x$0]));
+        configuration.setTransactionListenerProvider(transactionListenerProviders.orderedStream().toArray(TransactionListenerProvider[]::new));
 
         if ((Boolean) JooqAdvisorProperties.properties.get("printBanner")) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
