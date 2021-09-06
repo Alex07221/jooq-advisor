@@ -11,10 +11,11 @@ import lombok.ToString;
 @ToString
 @Setter
 public final class Page {
-    private Boolean doPage;
-    private Long currentPage;
-    private Long pageSize;
-    private Long total;
-    private Long pageTotal;
-    private Long offset;
+    private boolean doPage;
+    private long currentPage;
+    private long pageSize;
+    private long total;
+    private long pageTotal;
+    private long offset;
+
 }
