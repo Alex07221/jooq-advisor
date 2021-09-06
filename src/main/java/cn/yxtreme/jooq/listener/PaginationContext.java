@@ -29,7 +29,7 @@ public class PaginationContext {
      */
     final static void startPage(Long pageSize, Long currentPage) {
         var page = PageHelper.acquireInstance();
-        if (pageSize == null || currentPage == null) {
+        if (pageSize == null || currentPage == null || pageSize <= 0) {
             page.initPageInfo();
         } else {
             page.initPageInfo(pageSize, currentPage);
