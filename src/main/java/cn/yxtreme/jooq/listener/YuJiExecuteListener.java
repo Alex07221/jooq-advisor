@@ -1,6 +1,5 @@
 package cn.yxtreme.jooq.listener;
 
-import cn.yxtreme.jooq.model.PaginationContext;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.ExecuteContext;
 import org.jooq.impl.DefaultExecuteListener;
@@ -60,7 +59,6 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
                 pageHelper.setSelectingOriginal(false);
                 pageHelper = null;
                 doPage = null;
-                PaginationContext.destroyContext();
                 log.debug("原始查询结束");
             }
         }

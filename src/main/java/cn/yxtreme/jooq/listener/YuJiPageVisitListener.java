@@ -1,6 +1,5 @@
 package cn.yxtreme.jooq.listener;
 
-import cn.yxtreme.jooq.model.PaginationContext;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.*;
 
@@ -8,7 +7,7 @@ import static org.jooq.Clause.*;
 
 /**
  * It's listener about auto make pagination for jooq
- *
+ * <p>
  * TODO wait for jooq version update to replace the ${@link Clause}
  *
  * @author: Alex

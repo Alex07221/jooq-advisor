@@ -1,6 +1,6 @@
 package cn.yxtreme.jooq.listener;
 
-import cn.yxtreme.jooq.model.PaginationContext;
+import cn.hutool.core.bean.BeanUtil;
 import cn.yxtreme.jooq.utils.Classes;
 import cn.yxtreme.jooq.utils.SingleStack;
 import lombok.Getter;
@@ -58,50 +58,60 @@ public class PageHelper {
         selectSingleStack = new SingleStack(DSL.selectCount());
     }
 
+    public static final void startPage(Long pageSize, Long currentPage) {
+        PaginationContext.startPage(pageSize, currentPage);
+    }
+
+    public static final Page pageInfo() {
+        PageInfo pageInfo = PaginationContext.getPageHelper().getPageInfo();
+        PaginationContext.destroyContext();
+        return BeanUtil.copyProperties(pageInfo, Page.class);
+    }
+
     /**
      * acquire instance
      *
      * @return
      */
-    public static PageHelper acquireInstance() {
+    static PageHelper acquireInstance() {
         return new PageHelper();
     }
 
     /**
      * here are some function for recording page information
      */
-    public void initPageInfo(Long pageSize, Long currentPage) {
+    void initPageInfo(Long pageSize, Long currentPage) {
         pageInfo = new PageInfo(pageSize, currentPage);
     }
 
-    public void initPageInfo() {
+    void initPageInfo() {
         pageInfo = new PageInfo();
     }
 
-    public void buildPageInfo(Long total) {
+    void buildPageInfo(Long total) {
         pageInfo.buildPageInfo(total);
     }
 
     /**
      * here are some function for recording select stack
      */
-    public void recordTables(Table table) {
+    void recordTables(Table table) {
         this.tablesSingleStack.data().add(table);
     }
 
-    public void recordQueryPart(QueryPart queryPart) {
+    void recordQueryPart(QueryPart queryPart) {
         if (!queryPartsSingleStack.data().contains(queryPart)) {
             queryPartsSingleStack.data().add(queryPart);
         }
     }
 
-    public void recordGroupField(Field field) {
+    void recordGroupField(Field field) {
         if (!groupField.data().contains(field)) {
             groupField.data().add(field);
         }
     }
 
-    public void recordHavingCondition(QueryPart condition) {
+    void recordHavingCondition(QueryPart condition) {
         if (!havingConditionSingleStack.data().contains(condition)) {
             havingConditionSingleStack.data().add(condition);
         }
@@ -112,7 +122,7 @@ public class PageHelper {
      *
      * @param context
      */
-    protected synchronized void doPage(VisitContext context) {
+    synchronized void doPage(VisitContext context) {
         //If allow select total of number, and it's not reading.
         if (prepareSelectTotal && !readingTotal) {
             log.debug("开始准备分页");
@@ -264,7 +274,7 @@ public class PageHelper {
      * @since: 2021/8/4
      */
     @Getter
-    final class PageInfo {
+    static final class PageInfo {
         private final Boolean doPage;
         private Long currentPage;
         private Long pageSize;

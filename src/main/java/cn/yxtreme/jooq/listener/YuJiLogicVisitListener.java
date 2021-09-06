@@ -13,7 +13,7 @@ import static org.jooq.Clause.*;
 
 /**
  * It's listener about join the logic deleted condition for jooq
- *
+ * <p>
  * TODO wait for jooq version update to replace the ${@link Clause}
  *
  * @author: Alex

@@ -1,7 +1,5 @@
-package cn.yxtreme.jooq.model;
+package cn.yxtreme.jooq.listener;
 
-
-import cn.yxtreme.jooq.listener.PageHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +27,7 @@ public class PaginationContext {
      * @param pageSize
      * @param currentPage
      */
-    public final static void startPage(Long pageSize, Long currentPage) {
+    final static void startPage(Long pageSize, Long currentPage) {
         var page = PageHelper.acquireInstance();
         if (pageSize == null || currentPage == null) {
             page.initPageInfo();
@@ -43,14 +41,14 @@ public class PaginationContext {
     /**
      * 获取分页
      */
-    public final static PageHelper getPageHelper() {
+    final static PageHelper getPageHelper() {
         return (PageHelper) THREAD_LOCAL.get().get(PAGE_INFO);
     }
 
     /**
      * 销毁缓存
      */
-    public final static void destroyContext() {
+    final static void destroyContext() {
         THREAD_LOCAL.remove();
     }
 
