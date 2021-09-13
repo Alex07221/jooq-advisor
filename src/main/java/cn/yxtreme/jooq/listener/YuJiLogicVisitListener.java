@@ -25,9 +25,9 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
     /**
      * Here are some stack for recoding which we already process.
      */
-    private static SingleStack<List<Table>> tablesSingleStack;
-    private static SingleStack<List<Condition>> conditionsSingleStack;
-    private static SingleStack<Boolean> whereSingleStack;
+    private SingleStack<List<Table>> tablesSingleStack;
+    private SingleStack<List<Condition>> conditionsSingleStack;
+    private SingleStack<Boolean> whereSingleStack;
     private final BaseFieldConfig.DeleteField deleteField;
 
     public YuJiLogicVisitListener(Class<?> tablesClass, BaseFieldConfig.DeleteField deleteField) {
@@ -37,9 +37,9 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
 
     @Override
     void push() {
-        tablesSingleStack = new SingleStack(new ArrayList<Table>());
-        conditionsSingleStack = new SingleStack(new ArrayList<Condition>());
-        whereSingleStack = new SingleStack(false);
+        tablesSingleStack = SingleStack.provideStack(tablesSingleStack, new ArrayList<>());
+        conditionsSingleStack = SingleStack.provideStack(conditionsSingleStack, new ArrayList<>());
+        whereSingleStack = SingleStack.provideStack(whereSingleStack, false);
     }
 
 

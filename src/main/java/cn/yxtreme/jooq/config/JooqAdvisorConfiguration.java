@@ -55,7 +55,7 @@ public class JooqAdvisorConfiguration {
 
 
         var visits = visitListenerProviders.orderedStream().collect(Collectors.toSet());
-        var executes =executeListenerProviders.orderedStream().collect(Collectors.toSet());
+        var executes = executeListenerProviders.orderedStream().collect(Collectors.toSet());
         var records = recordListenerProviders.orderedStream().collect(Collectors.toSet());
 
         var fieldConfig = ((Class<? extends BaseFieldConfig>) JooqAdvisorProperties.properties.get("fieldClass")).getConstructor().newInstance();

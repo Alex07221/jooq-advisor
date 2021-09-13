@@ -28,10 +28,11 @@ public class YuJiUpdateRecordListener extends DefaultRecordListener {
     public void updateStart(RecordContext ctx) {
         super.updateStart(ctx);
         Record record = ctx.record();
-        Field<Integer> version = (Field<Integer>) record.field(updateField.getVersion());
-        Conditions.onFalse((Field<LocalDateTime>) record.field(updateField.getUpdated()), Objects::isNull
-                , e -> Conditions.onFalse(e, Objects::isNull, t -> record.set(t, LocalDateTime.now())));
-        Conditions.onFalse((Field<Integer>) record.field(updateField.getVersion()), Objects::isNull
-                , e -> Conditions.onFalse(e, Objects::isNull, t -> record.set(t, record.getValue(version) + 1)));
+        try {
+            Conditions.onFalse((Field<LocalDateTime>) record.field(updateField.getUpdated()), Objects::isNull
+                    , e -> Conditions.onFalse(e, Objects::isNull, t -> record.set(t, LocalDateTime.now())));
+        } catch (ClassCastException e) {
+            log.warn("current table's fields have an not support type, please check and retry, cast error message: {}", e.getMessage());
+        }
     }
 }

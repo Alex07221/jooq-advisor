@@ -18,7 +18,7 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
 
     @Override
     public void start(ExecuteContext ctx) {
-        pageHelper = PaginationContext.getPageHelper();
+        pageHelper = AdvisorContext.getPageHelper();
         if (pageHelper != null) {
             doPage = pageHelper.getPageInfo().getDoPage();
         } else {

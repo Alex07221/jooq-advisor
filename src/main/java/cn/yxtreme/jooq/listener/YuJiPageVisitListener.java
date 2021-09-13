@@ -29,7 +29,7 @@ public class YuJiPageVisitListener extends BaseVisitListener {
     @Override
     void push() {
         log.debug("初始化分页条件");
-        pageHelper = PaginationContext.getPageHelper();
+        pageHelper = AdvisorContext.getPageHelper();
 
         if (pageHelper != null) {
             doPage = pageHelper.getPageInfo().getDoPage();

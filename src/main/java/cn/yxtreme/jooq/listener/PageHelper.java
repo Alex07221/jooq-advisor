@@ -59,12 +59,12 @@ public class PageHelper {
     }
 
     public static final void startPage(Long pageSize, Long currentPage) {
-        PaginationContext.startPage(pageSize, currentPage);
+        AdvisorContext.startPage(pageSize, currentPage);
     }
 
     public static final Page pageInfo() {
-        PageInfo pageInfo = PaginationContext.getPageHelper().getPageInfo();
-        PaginationContext.destroyContext();
+        PageInfo pageInfo = AdvisorContext.getPageHelper().getPageInfo();
+        AdvisorContext.destroyContext();
         return BeanUtil.copyProperties(pageInfo, Page.class);
     }
 

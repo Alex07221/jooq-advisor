@@ -8,13 +8,16 @@ import java.util.Map;
  * @author: Alex
  * @since: 2021/7/19
  */
-public class PaginationContext {
+public class AdvisorContext {
 
 
     /**
      * 本次查询是否分页
      */
     private static final String PAGE_INFO = "pageInfo";
+    private static final String INSERT_DEFAULT = "pageInfo";
+    private static final String UPDATE_DEFAULT = "pageInfo";
+    private static final String DELETE_DEFAULT = "pageInfo";
     /**
      * 本地缓存
      */
