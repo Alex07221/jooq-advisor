@@ -167,15 +167,51 @@ public class Conditions {
     /**
      * 简易链式结构，判断每一个步骤是否可以继续
      *
+     * @param function1 判断表达式
+     * @param function2 判ture继续处理的方法
+     * @param function3 判false继续处理的方法
+     * @return 自定义返回值处理
+     */
+    public static final <R> R onCondition(Boolean function1, Supplier<R> function2, Supplier<R> function3) {
+        return function1 ? function2.get() : function3.get();
+    }
+
+    /**
+     * 简易链式结构，判断每一个步骤是否可以继续
+     *
      * @param t         需要判断的值
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Boolean function1, Supplier<R> function2, Supplier<R> function3) {
-        return function1 ? function2.get() : function3.get();
+    public static final <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, LeastConditionFunction function3) {
+        if (function1.apply(t)){
+            function2.doAction();
+        }else {
+            function3.doAction();
+        }
     }
+
+
+
+    /**
+     * 简易链式结构，判断每一个步骤是否可以继续
+     *
+     * @param t         需要判断的值
+     * @param function1 判断表达式
+     * @param function2 判ture继续处理的方法
+     * @param function3 判false继续处理的方法
+     * @return 自定义返回值处理
+     */
+    public static final <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, Consumer<T> function3) {
+        if (function1.apply(t)){
+            function2.doAction();
+        }else {
+            function3.accept(t);
+        }
+    }
+
 
     /**
      * 简易链式结构，判断每一个步骤是否可以继续
