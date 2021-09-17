@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.13.0.xsd">
+    <jdbc>
+        <driver>org.postgresql.Driver</driver>
+        <url>jdbc:postgresql://10.10.130.2:5432/prescription</url>
+        <user>pocsql</user>
+        <password>WJppFcU#ry</password>
+    </jdbc>
+    <generator>
+        <!-- 代码生成器 -->
+        <name>cn.yxtreme.jooq.generate.YujiGenerator</name>
+        <strategy>
+            <name>cn.yxtreme.jooq.generate.YuJiGeneratorStrategy</name>
+        </strategy>
+        <database>
+            <name>org.jooq.meta.postgres.PostgresDatabase</name>            <!--include和exclude用于控制为数据库中哪些表生成代码-->
+            <includes>.*</includes>
+            <!--数据库名称-->
+            <inputSchema>public</inputSchema>
+            <forcedTypes>
+                <forcedType>
+                    <name>Integer</name>
+                    <includeTypes>int2</includeTypes>
+                </forcedType>
+            </forcedTypes>
+        </database>
+        <generate>
+            <pojos>true</pojos>
+            <!--是否把数据库时间类型映射到java 8时间类型-->
+            <javaTimeTypes>true</javaTimeTypes>
+            <daos>true</daos>
+            <pojosToString>false</pojosToString>
+        </generate>
+        <target>
+            <!--生成代码文件的包名及放置目录-->
+            <packageName>cn.yxtreme.jooq.jooq</packageName>
+            <directory>src/main/java</directory>
+        </target>
+    </generator>
+    <logging>INFO</logging>
+</configuration>

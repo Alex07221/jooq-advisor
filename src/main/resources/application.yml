@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST:10.10.130.2}:5432/prescription
+    username: ${POSTGRESQL_USERNAME:pocsql}
+    password: ${POSTGRESQL_PASSWORD:WJppFcU#ry}
+    driver-class-name: org.postgresql.Driver
