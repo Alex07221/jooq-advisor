@@ -57,10 +57,10 @@ public abstract class BaseVisitListener extends DefaultVisitListener {
     /**
      * init what we need
      */
-    abstract void push();
+    abstract void push(VisitContext context);
 
     /**
      * destroy what we need
      */
-    abstract void pop();
+    abstract void pop(VisitContext context);
 }

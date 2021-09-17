@@ -25,9 +25,6 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
     /**
      * Here are some stack for recoding which we already process.
      */
-    private SingleStack<List<Table>> tablesSingleStack;
-    private SingleStack<List<Condition>> conditionsSingleStack;
-    private SingleStack<Boolean> whereSingleStack;
     private final BaseFieldConfig.DeleteField deleteField;
 
     public YuJiLogicVisitListener(Class<?> tablesClass, BaseFieldConfig.DeleteField deleteField) {
@@ -36,18 +33,51 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
     }
 
     @Override
-    void push() {
-        tablesSingleStack = SingleStack.provideStack(tablesSingleStack, new ArrayList<>());
-        conditionsSingleStack = SingleStack.provideStack(conditionsSingleStack, new ArrayList<>());
-        whereSingleStack = SingleStack.provideStack(whereSingleStack, false);
+    void push(VisitContext context) {
+        tableStack(context);
+        conditionStack(context);
+        whereStack(context);
     }
 
-
     @Override
-    void pop() {
-        tablesSingleStack.pop();
-        conditionsSingleStack.pop();
-        whereSingleStack.pop();
+    void pop(VisitContext context) {
+        whereStack(context).pop();
+        conditionStack(context).pop();
+        tableStack(context).pop();
+
+    }
+
+    private SingleStack<List<Table>> tableStack(VisitContext context) {
+        SingleStack<List<Table>> data = (SingleStack<List<Table>>) context.data("tables");
+
+        if (data == null) {
+            data = new SingleStack<>(new ArrayList<>());
+            context.data("tables", data);
+        }
+
+        return data;
+    }
+
+    private SingleStack<List<Condition>> conditionStack(VisitContext context) {
+        SingleStack<List<Condition>> data = (SingleStack<List<Condition>>) context.data("conditions");
+
+        if (data == null) {
+            data = new SingleStack<>(new ArrayList<>());
+            context.data("conditions", data);
+        }
+
+        return data;
+    }
+
+    private SingleStack<Boolean> whereStack(VisitContext context) {
+        SingleStack<Boolean> data = (SingleStack<Boolean>) context.data("predicates");
+
+        if (data == null) {
+            data = new SingleStack<>(false);
+            context.data("predicates", data);
+        }
+
+        return data;
     }
 
     void pushConditions(VisitContext context) {
@@ -63,7 +93,7 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
                 if (parts[i] instanceof Table) {
 
                     var table = ((Table<?>) parts[i]);
-                    if (!tablesSingleStack.data().contains(table)) {
+                    if (!tableStack(context).data().contains(table)) {
 
                         // acquire logic field
                         f = table.field(deleteField.getDeleted());
@@ -72,7 +102,7 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
                         if (clauses.contains(TABLE_ALIAS) && ORIGINAL_TABLE_NAMES.contains(table.getName())) {
                             f = null;
                         } else {
-                            tablesSingleStack.data().add(table);
+                            tableStack(context).data().add(table);
                             break;
                         }
                     }
@@ -82,8 +112,8 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
 
             var condition = f == null ? null : f.eq(false);
 
-            if (condition != null && !conditionsSingleStack.data().contains(condition)) {
-                conditionsSingleStack.data().add(condition);
+            if (condition != null && !conditionStack(context).data().contains(condition)) {
+                conditionStack(context).data().add(condition);
             }
         }
     }
@@ -94,7 +124,7 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
 
         // Enter a new SELECT clause
         if (context.clause() == SELECT) {
-            push();
+            push(context);
         }
     }
 
@@ -102,12 +132,12 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
     public void clauseEnd(VisitContext context) {
         // Append all collected predicates to the WHERE clause if any
         if (context.clause() == SELECT_WHERE) {
-            List<Condition> conditions = conditionsSingleStack.data();
+            List<Condition> conditions = conditionStack(context).data();
 
             if (conditions.size() > 0) {
                 context.context()
                         .formatSeparator()
-                        .keyword(whereSingleStack.data() ? "and" : "where")
+                        .keyword(whereStack(context).data() ? "and" : "where")
                         .sql(' ');
 
                 context.context().visit(DSL.condition(Operator.AND, conditions));
@@ -116,7 +146,7 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
 
         // Leave a SELECT clause
         if (context.clause() == SELECT) {
-            pop();
+            pop(context);
         }
     }
 
@@ -128,7 +158,7 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
             List<Clause> clauses = clauses(context);
 
             if (clauses.contains(SELECT_WHERE)) {
-                whereSingleStack.refresh(true);
+                whereStack(context).refresh(true);
             }
         }
     }

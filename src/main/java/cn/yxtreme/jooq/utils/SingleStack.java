@@ -12,10 +12,6 @@ import java.util.Deque;
 public class SingleStack<T> {
     private final Deque<T> data;
 
-    public static <T> SingleStack<T> provideStack(SingleStack<T> singleStack, T data) {
-        return singleStack != null && singleStack.hasElement() ? singleStack : new SingleStack(data);
-    }
-
     public SingleStack(T data) {
         this.data = new ArrayDeque<>();
         this.data.push(data);
@@ -27,12 +23,8 @@ public class SingleStack<T> {
         }
     }
 
-    public boolean hasElement() {
-        return stack().size() > 0;
-    }
-
     public synchronized void refresh(T t) {
-        stack().pop();
+        pop();
         stack().push(t);
     }
 
