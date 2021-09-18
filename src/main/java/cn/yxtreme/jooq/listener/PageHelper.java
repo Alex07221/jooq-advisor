@@ -114,7 +114,7 @@ public class PageHelper {
      *
      * @param context
      */
-    synchronized void doPage(VisitContext context) {
+    void doPage(VisitContext context) {
         //If allow select total of number, and it's not reading.
         if (prepareSelectTotal && !readingTotal) {
             log.debug("开始准备分页");
@@ -250,6 +250,9 @@ public class PageHelper {
      * @return
      */
     private boolean isFieldCondition(Object condition) {
+        if (Classes.compareTypeByName(condition, "org.jooq.impl.InCondition")) {
+            return false;
+        }
         Object field1 = Classes.getFieldValue(condition, "field1");
         Object field2 = Classes.getFieldValue(condition, "field2");
 
@@ -292,6 +295,7 @@ public class PageHelper {
             this.offset = offset <= 0 ? 0 : offset;
             this.total = total;
             this.pageTotal = (total + this.pageSize - 1) / this.pageSize;
+            this.currentPage = currentPage > pageTotal ? pageTotal : currentPage;
         }
     }
 }
