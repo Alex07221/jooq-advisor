@@ -32,14 +32,12 @@ public class YuJiLogicVisitListener extends BaseVisitListener {
         this.deleteField = deleteField;
     }
 
-    @Override
     void push(VisitContext context) {
         tableStack(context);
         conditionStack(context);
         whereStack(context);
     }
 
-    @Override
     void pop(VisitContext context) {
         whereStack(context).pop();
         conditionStack(context).pop();

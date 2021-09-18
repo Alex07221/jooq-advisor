@@ -50,7 +50,8 @@ public class PageHelper {
     @Getter
     private PageInfo pageInfo;
 
-    private PageHelper() {
+
+    PageHelper() {
         tablesSingleStack = new SingleStack(new ArrayList<Table>());
         queryPartsSingleStack = new SingleStack(new ArrayList<QueryPart>());
         havingConditionSingleStack = new SingleStack(new ArrayList<QueryPart>());
@@ -58,23 +59,14 @@ public class PageHelper {
         selectSingleStack = new SingleStack(DSL.selectCount());
     }
 
-    public static final void startPage(Long pageSize, Long currentPage) {
+    public synchronized static final void startPage(Long pageSize, Long currentPage) {
         AdvisorContext.startPage(pageSize, currentPage);
     }
 
-    public static final Page pageInfo() {
+    public synchronized static final Page pageInfo() {
         PageInfo pageInfo = AdvisorContext.getPageHelper().getPageInfo();
         AdvisorContext.destroyContext();
         return BeanUtil.copyProperties(pageInfo, Page.class);
-    }
-
-    /**
-     * acquire instance
-     *
-     * @return
-     */
-    static PageHelper acquireInstance() {
-        return new PageHelper();
     }
 
     /**
@@ -275,7 +267,7 @@ public class PageHelper {
      */
     @Getter
     static final class PageInfo {
-        private final Boolean doPage;
+        private final boolean doPage;
         private Long currentPage;
         private Long pageSize;
         private Long total;

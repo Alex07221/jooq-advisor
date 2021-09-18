@@ -53,14 +53,4 @@ public abstract class BaseVisitListener extends DefaultVisitListener {
             return result;
         }
     }
-
-    /**
-     * init what we need
-     */
-    abstract void push(VisitContext context);
-
-    /**
-     * destroy what we need
-     */
-    abstract void pop(VisitContext context);
 }
