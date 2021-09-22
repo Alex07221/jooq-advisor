@@ -250,17 +250,7 @@ public class PageHelper {
      * @return
      */
     private boolean isFieldCondition(Object condition) {
-        if (Classes.compareTypeByName(condition, "org.jooq.impl.InCondition")) {
-            return false;
-        }
-        Object field1 = Classes.getFieldValue(condition, "field1");
-        Object field2 = Classes.getFieldValue(condition, "field2");
-
-        if (field1 == null || field2 == null) {
-            return true;
-        }
-        return Classes.compareTypeByName(field1, "org.jooq.impl.TableFieldImpl")
-                && Classes.compareTypeByName(field2, "org.jooq.impl.TableFieldImpl");
+        return Classes.compareTypeByName(condition, "org.jooq.impl.FieldCondition");
     }
 
 
@@ -291,11 +281,11 @@ public class PageHelper {
          * set page information
          */
         private void buildPageInfo(Long total) {
-            var offset = (this.currentPage - 1) * this.pageSize;
-            this.offset = offset <= 0 ? 0 : offset;
             this.total = total;
             this.pageTotal = (total + this.pageSize - 1) / this.pageSize;
             this.currentPage = currentPage > pageTotal ? pageTotal : currentPage;
+            var offset = (this.currentPage - 1) * this.pageSize;
+            this.offset = offset <= 0 ? 0 : offset;
         }
     }
 }

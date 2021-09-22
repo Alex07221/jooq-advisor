@@ -36,7 +36,6 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
             sql += String.format(" limit %s offset %s ", pageHelper().getPageInfo().getPageSize(), pageHelper().getPageInfo().getOffset());
             ctx.sql(sql);
         }
-        super.prepareStart(ctx);
     }
 
     @Override
@@ -45,7 +44,6 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
             log.debug("读取总数据量");
             pageHelper().buildPageInfo(ctx.record().getValue(0, Long.class));
         }
-        super.recordEnd(ctx);
     }
 
     @Override
@@ -61,7 +59,6 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
                 log.debug("原始查询结束");
             }
         }
-        super.end(ctx);
     }
 
 }
