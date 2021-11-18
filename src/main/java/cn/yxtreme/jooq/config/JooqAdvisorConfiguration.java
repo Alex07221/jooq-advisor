@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 import java.util.stream.Collectors;
 
 /**
- * @author: xuZeBiao
+ * @author: Alex
  * @since: 2021/7/27
  */
 public class JooqAdvisorConfiguration {
@@ -93,8 +93,7 @@ public class JooqAdvisorConfiguration {
                     break;
             }
         }
-
-
+        executes.add(DefaultExecuteListenerProvider.providers(new YujiLoggerListener())[0]);
         configuration.set(ArrayUtil.toArray(visits, VisitListenerProvider.class));
         configuration.set(ArrayUtil.toArray(executes, ExecuteListenerProvider.class));
         configuration.set(ArrayUtil.toArray(records, RecordListenerProvider.class));
@@ -110,7 +109,7 @@ public class JooqAdvisorConfiguration {
                     "| |__' | \\  `-'  /\\  `-'  /\\  `-'  \\_   _/ /   \\ \\_| \\__/  | \\ \\/ /  | |  `'.'.| \\__. | | |     \n" +
                     "`.____.'  `.___.'  `.___.'  `.___.\\__| |____| |____|'.__.;__] \\__/  [___][\\__) )'.__.' [___]    \n");
             System.out.println();
-            System.out.println("version: 1.0.4");
+            System.out.println("version: 1.3.1");
             System.out.println("see more detail to https://github.com/Alex07221/jooq-advisor/tree/master");
             System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
