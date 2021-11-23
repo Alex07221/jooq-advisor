@@ -7,7 +7,6 @@ import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 /**
  * @author: xuZeBiao
@@ -21,7 +20,7 @@ import java.time.OffsetDateTime;
 public class BasePO {
     private Long id;
     private Boolean deleted;
-    private LocalDateTime created;
-    private LocalDateTime updated;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Integer version;
 }

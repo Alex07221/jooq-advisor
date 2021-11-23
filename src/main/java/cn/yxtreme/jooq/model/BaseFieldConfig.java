@@ -1,6 +1,5 @@
 package cn.yxtreme.jooq.model;
 
-import cn.yxtreme.jooq.annotations.EnableJooqAdvisor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,8 +47,8 @@ public class BaseFieldConfig {
 
         private InsertField() {
             this.id = "id";
-            this.created = "created";
-            this.updated = "updated";
+            this.created = "createdAt";
+            this.updated = "updatedAt";
             this.version = "version";
             this.deleted = "deleted";
         }
@@ -64,7 +63,7 @@ public class BaseFieldConfig {
         private String version;
 
         private UpdateField() {
-            this.updated = "updated";
+            this.updated = "updatedAt";
             this.version = "version";
         }
     }
