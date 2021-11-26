@@ -30,7 +30,7 @@ public class YuJiUpdateRecordListener extends DefaultRecordListener {
         Record record = ctx.record();
         try {
             Conditions.onFalse((Field<LocalDateTime>) record.field(updateField.getUpdated()), Objects::isNull
-                    , e -> Conditions.onFalse(e, Objects::isNull, t -> record.set(t, LocalDateTime.now())));
+                    , e -> Conditions.onFalse(e, t -> t.get(record) != null, t -> record.set(t, LocalDateTime.now())));
         } catch (ClassCastException e) {
             log.warn("current table's fields have an not support type, please check and retry, cast error message: {}", e.getMessage());
         }

@@ -18,21 +18,21 @@ public class BaseFieldConfig {
     private DeleteField deleteField;
 
     public BaseFieldConfig() {
-        initInsertField();
-        initUpdateField();
-        initDeleteField();
+        insertField = initInsertField();
+        updateField = initUpdateField();
+        deleteField = initDeleteField();
     }
 
-    public void initInsertField() {
-        this.insertField = new InsertField();
+    public InsertField initInsertField() {
+        return new InsertField();
     }
 
-    public void initUpdateField() {
-        this.updateField = new UpdateField();
+    public UpdateField initUpdateField() {
+        return new UpdateField();
     }
 
-    public void initDeleteField() {
-        this.deleteField = new DeleteField();
+    public DeleteField initDeleteField() {
+        return new DeleteField();
     }
 
     @Builder
@@ -47,8 +47,8 @@ public class BaseFieldConfig {
 
         private InsertField() {
             this.id = "id";
-            this.created = "createdAt";
-            this.updated = "updatedAt";
+            this.created = "created_at";
+            this.updated = "updated_at";
             this.version = "version";
             this.deleted = "deleted";
         }
@@ -63,7 +63,7 @@ public class BaseFieldConfig {
         private String version;
 
         private UpdateField() {
-            this.updated = "updatedAt";
+            this.updated = "updated_at";
             this.version = "version";
         }
     }
