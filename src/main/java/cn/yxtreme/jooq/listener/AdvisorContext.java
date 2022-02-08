@@ -27,7 +27,7 @@ public class AdvisorContext {
      */
     synchronized static void startPage(Long pageSize, Long currentPage) {
         if (Optional.ofNullable(THREAD_LOCAL.get()).isPresent()) {
-            throw new RuntimeException("PageHelper already exist");
+            return;
         }
         var page = new PageHelper();
         if (pageSize == null || currentPage == null || pageSize <= 0) {

@@ -168,7 +168,7 @@ public class PageHelper {
             }
 
             // if condition "where" did not appear, skip loop
-            if (notMeetWhere){
+            if (notMeetWhere) {
                 continue;
             }
             // When we first come here, it should be 'where' case, so it only needs once
