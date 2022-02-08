@@ -5,6 +5,7 @@ import cn.yxtreme.jooq.utils.Classes;
 import cn.yxtreme.jooq.utils.SingleStack;
 import org.jooq.*;
 import org.jooq.impl.DSL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,22 +144,31 @@ public class PageHelper {
     private void joinWhere(List<QueryPart> conditions) {
         var isOr = false;
         var flag1 = true;
+        var notMeetWhere = true;
         for (QueryPart condition : conditions) {
             var data = selectSingleStack.data();
             /* skip the KeyWord, but do some processing when 'group' or 'or' come up  */
             if (condition instanceof Keyword) {
                 var asIs = (String) Classes.getFieldValue(condition, "asIs");
                 switch (asIs) {
-                case "or": 
-                    isOr = true;
-                    break;
-                case "group by": 
-                    SelectConditionStep data1 = (SelectConditionStep) data;
-                    selectSingleStack.refresh(data1.groupBy(groupField.data()));
-                    break;
-                default: 
-                    break;
+                    case "or":
+                        isOr = true;
+                        break;
+                    case "group by":
+                        SelectConditionStep data1 = (SelectConditionStep) data;
+                        selectSingleStack.refresh(data1.groupBy(groupField.data()));
+                        break;
+                    case "where":
+                        notMeetWhere = false;
+                        break;
+                    default:
+                        break;
                 }
+                continue;
+            }
+
+            // if condition "where" did not appear, skip loop
+            if (notMeetWhere){
                 continue;
             }
             // When we first come here, it should be 'where' case, so it only needs once
@@ -305,6 +315,7 @@ public class PageHelper {
     }
 
     //<editor-fold defaultstate="collapsed" desc="delombok">
+
     /**
      * here are some boolean for mark
      */
