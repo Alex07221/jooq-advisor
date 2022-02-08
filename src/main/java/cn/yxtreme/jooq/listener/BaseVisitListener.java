@@ -1,5 +1,6 @@
 package cn.yxtreme.jooq.listener;
 
+import cn.hutool.core.util.ReflectUtil;
 import org.jooq.Clause;
 import org.jooq.VisitContext;
 import org.jooq.impl.DefaultVisitListener;
@@ -32,7 +33,7 @@ public abstract class BaseVisitListener extends DefaultVisitListener {
             try {
                 Method method = type.getMethod("getName");
                 method.setAccessible(true);
-                ORIGINAL_TABLE_NAMES.add((String) method.invoke(type.newInstance()));
+                ORIGINAL_TABLE_NAMES.add((String) method.invoke(ReflectUtil.newInstanceIfPossible(type)));
             } catch (Exception e) {
                 e.printStackTrace();
             }

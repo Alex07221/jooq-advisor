@@ -16,7 +16,7 @@ public class AdvisorContext {
     /**
      * 本地缓存
      */
-    private static ThreadLocal<PageHelper> THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<PageHelper> THREAD_LOCAL = new ThreadLocal<>();
 
 
     /**
@@ -25,7 +25,7 @@ public class AdvisorContext {
      * @param pageSize
      * @param currentPage
      */
-    synchronized final static void startPage(Long pageSize, Long currentPage) {
+    synchronized static void startPage(Long pageSize, Long currentPage) {
         if (Optional.ofNullable(THREAD_LOCAL.get()).isPresent()) {
             throw new RuntimeException("PageHelper already exist");
         }
@@ -42,14 +42,14 @@ public class AdvisorContext {
     /**
      * 获取分页
      */
-    final static PageHelper getPageHelper() {
+    static PageHelper getPageHelper() {
         return THREAD_LOCAL.get();
     }
 
     /**
      * 销毁缓存
      */
-    synchronized final static void destroyContext() {
+    synchronized static void destroyContext() {
         THREAD_LOCAL.remove();
     }
 

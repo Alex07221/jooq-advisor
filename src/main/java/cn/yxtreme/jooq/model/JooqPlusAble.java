@@ -31,5 +31,10 @@ public enum JooqPlusAble {
     /**
      * join default value to update
      */
-    UPDATE_DEFAULT
+    UPDATE_DEFAULT,
+
+    /**
+     * simple format log
+     */
+    SIMPLE_LOG
 }

@@ -15,7 +15,6 @@ import java.lang.annotation.Target;
  * @author: Alex
  * @since: 2021/8/10
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Import({JooqAdvisorProperties.class, JooqAdvisorConfiguration.class})

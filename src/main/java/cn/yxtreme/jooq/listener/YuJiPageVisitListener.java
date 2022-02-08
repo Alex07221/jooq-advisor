@@ -1,8 +1,6 @@
 package cn.yxtreme.jooq.listener;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jooq.*;
-
 import static org.jooq.Clause.*;
 
 /**
@@ -13,8 +11,11 @@ import static org.jooq.Clause.*;
  * @author: Alex
  * @since: 2021/7/28
  */
-@Slf4j
 public class YuJiPageVisitListener extends BaseVisitListener {
+    //<editor-fold defaultstate="collapsed" desc="delombok">
+    @SuppressWarnings("all")
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(YuJiPageVisitListener.class);
+    //</editor-fold>
 
     public YuJiPageVisitListener(Class<?> tablesClass) {
         super(tablesClass);
@@ -51,13 +52,11 @@ public class YuJiPageVisitListener extends BaseVisitListener {
         } else if (queryPart instanceof Condition || queryPart instanceof Keyword) {
             pageHelper().recordQueryPart(queryPart);
         }
-
         if (clauses(context).contains(SELECT_GROUP_BY)) {
             if (queryPart instanceof Field) {
                 pageHelper().recordGroupField((Field) queryPart);
             }
         }
-
         if (clauses(context).contains(SELECT_HAVING)) {
             if (queryPart instanceof Condition || queryPart instanceof Keyword) {
                 pageHelper().recordHavingCondition(queryPart);
@@ -83,5 +82,4 @@ public class YuJiPageVisitListener extends BaseVisitListener {
             joinPageCondition(context);
         }
     }
-
 }

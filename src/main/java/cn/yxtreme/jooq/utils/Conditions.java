@@ -16,9 +16,8 @@ public class Conditions {
      * @param t         需要判断的值
      * @param function1 判断表达式
      * @param function2 继续处理的方法
-     * @return 处理成功的列表或者不通过返回空列表
      */
-    public static final <T> void onFalse(T t, Function<T, Boolean> function1, Consumer<T> function2) {
+    public static <T> void onFalse(T t, Function<T, Boolean> function1, Consumer<T> function2) {
         if (!function1.apply(t)) {
             function2.accept(t);
         }
@@ -30,9 +29,8 @@ public class Conditions {
      * @param t         需要判断的值
      * @param function1 判断表达式
      * @param function2 继续处理的方法
-     * @return 处理成功的列表或者不通过返回空列表
      */
-    public static final <T> void onFalse(T t, Boolean function1, Consumer<T> function2) {
+    public static <T> void onFalse(T t, Boolean function1, Consumer<T> function2) {
         if (!function1) {
             function2.accept(t);
         }
@@ -45,9 +43,8 @@ public class Conditions {
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
-     * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Function<T, Boolean> function1, Function<T, R> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Function<T, Boolean> function1, Function<T, R> function2, Function<T, R> function3) {
         return function1.apply(t) ? function2.apply(t) : function3.apply(t);
     }
 
@@ -60,7 +57,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Boolean function1, Function<T, R> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Boolean function1, Function<T, R> function2, Function<T, R> function3) {
         return function1 ? function2.apply(t) : function3.apply(t);
     }
 
@@ -73,7 +70,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Function<T, Boolean> function1, Supplier<R> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Function<T, Boolean> function1, Supplier<R> function2, Function<T, R> function3) {
         return function1.apply(t) ? function2.get() : function3.apply(t);
     }
 
@@ -86,7 +83,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Boolean function1, Supplier<R> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Boolean function1, Supplier<R> function2, Function<T, R> function3) {
         return function1 ? function2.get() : function3.apply(t);
     }
 
@@ -99,7 +96,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Function<T, Boolean> function1, Function<T, R> function2, Supplier<R> function3) {
+    public static <T, R> R onCondition(T t, Function<T, Boolean> function1, Function<T, R> function2, Supplier<R> function3) {
         return function1.apply(t) ? function2.apply(t) : function3.get();
     }
 
@@ -112,7 +109,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t,  Boolean function1, Function<T, R> function2, Supplier<R> function3) {
+    public static <T, R> R onCondition(T t, Boolean function1, Function<T, R> function2, Supplier<R> function3) {
         return function1 ? function2.apply(t) : function3.get();
     }
 
@@ -125,7 +122,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Function<T, Boolean> function1, Consumer<T> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Function<T, Boolean> function1, Consumer<T> function2, Function<T, R> function3) {
         if (function1.apply(t)) {
             function2.accept(t);
             return null;
@@ -133,6 +130,7 @@ public class Conditions {
             return function3.apply(t);
         }
     }
+
     /**
      * 简易链式结构，判断每一个步骤是否可以继续
      *
@@ -142,7 +140,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Boolean function1, Consumer<T> function2, Function<T, R> function3) {
+    public static <T, R> R onCondition(T t, Boolean function1, Consumer<T> function2, Function<T, R> function3) {
         if (function1) {
             function2.accept(t);
             return null;
@@ -160,7 +158,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <T, R> R onCondition(T t, Function<T, Boolean> function1, Supplier<R> function2, Supplier<R> function3) {
+    public static <T, R> R onCondition(T t, Function<T, Boolean> function1, Supplier<R> function2, Supplier<R> function3) {
         return function1.apply(t) ? function2.get() : function3.get();
     }
 
@@ -172,7 +170,7 @@ public class Conditions {
      * @param function3 判false继续处理的方法
      * @return 自定义返回值处理
      */
-    public static final <R> R onCondition(Boolean function1, Supplier<R> function2, Supplier<R> function3) {
+    public static <R> R onCondition(Boolean function1, Supplier<R> function2, Supplier<R> function3) {
         return function1 ? function2.get() : function3.get();
     }
 
@@ -183,16 +181,14 @@ public class Conditions {
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
-     * @return 自定义返回值处理
      */
-    public static final <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, LeastConditionFunction function3) {
-        if (function1.apply(t)){
+    public static <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, LeastConditionFunction function3) {
+        if (function1.apply(t)) {
             function2.doAction();
-        }else {
+        } else {
             function3.doAction();
         }
     }
-
 
 
     /**
@@ -202,12 +198,11 @@ public class Conditions {
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
-     * @return 自定义返回值处理
      */
-    public static final <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, Consumer<T> function3) {
-        if (function1.apply(t)){
+    public static <T> void onCondition(T t, Function<T, Boolean> function1, LeastConditionFunction function2, Consumer<T> function3) {
+        if (function1.apply(t)) {
             function2.doAction();
-        }else {
+        } else {
             function3.accept(t);
         }
     }
@@ -220,9 +215,8 @@ public class Conditions {
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
-     * @return 自定义返回值处理
      */
-    public static final <T> void onCondition(T t, Function<T, Boolean> function1, Consumer<T> function2, Consumer<T> function3) {
+    public static <T> void onCondition(T t, Function<T, Boolean> function1, Consumer<T> function2, Consumer<T> function3) {
         if (function1.apply(t)) {
             function2.accept(t);
         } else {
@@ -238,9 +232,8 @@ public class Conditions {
      * @param function1 判断表达式
      * @param function2 判ture继续处理的方法
      * @param function3 判false继续处理的方法
-     * @return 自定义返回值处理
      */
-    public static final <T> void onCondition(T t, Boolean function1, Consumer<T> function2, Consumer<T> function3) {
+    public static <T> void onCondition(T t, Boolean function1, Consumer<T> function2, Consumer<T> function3) {
         if (function1) {
             function2.accept(t);
         } else {

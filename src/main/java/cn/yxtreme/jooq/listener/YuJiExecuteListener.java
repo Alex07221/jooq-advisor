@@ -1,8 +1,8 @@
 package cn.yxtreme.jooq.listener;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jooq.ExecuteContext;
 import org.jooq.impl.DefaultExecuteListener;
+import java.util.Objects;
 
 /**
  * It's listener about auto make pagination for jooq before execute
@@ -10,8 +10,11 @@ import org.jooq.impl.DefaultExecuteListener;
  * @author: Alex
  * @since: 2021/7/29
  */
-@Slf4j
 public class YuJiExecuteListener extends DefaultExecuteListener {
+    //<editor-fold defaultstate="collapsed" desc="delombok">
+    @SuppressWarnings("all")
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(YuJiExecuteListener.class);
+    //</editor-fold>
 
     private PageHelper pageHelper() {
         return AdvisorContext.getPageHelper();
@@ -42,7 +45,7 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
     public void recordEnd(ExecuteContext ctx) {
         if (doPage() && pageHelper().getReadingTotal()) {
             log.debug("读取总数据量");
-            pageHelper().buildPageInfo(ctx.record().getValue(0, Long.class));
+            pageHelper().buildPageInfo(Objects.requireNonNull(ctx.record()).getValue(0, Long.class));
         }
     }
 
@@ -60,5 +63,4 @@ public class YuJiExecuteListener extends DefaultExecuteListener {
             }
         }
     }
-
 }

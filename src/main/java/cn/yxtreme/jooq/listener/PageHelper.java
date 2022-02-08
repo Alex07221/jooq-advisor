@@ -3,12 +3,8 @@ package cn.yxtreme.jooq.listener;
 import cn.hutool.core.bean.BeanUtil;
 import cn.yxtreme.jooq.utils.Classes;
 import cn.yxtreme.jooq.utils.SingleStack;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.jooq.*;
 import org.jooq.impl.DSL;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +16,11 @@ import java.util.List;
  * @author: Alex
  * @since: 2021/7/29
  */
-@Slf4j
 public class PageHelper {
+    //<editor-fold defaultstate="collapsed" desc="delombok">
+    @SuppressWarnings("all")
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PageHelper.class);
+    //</editor-fold>
     /**
      * here are some stack for inquire.
      */
@@ -30,26 +29,16 @@ public class PageHelper {
     private final SingleStack<List<QueryPart>> havingConditionSingleStack;
     private final SingleStack<List<Field>> groupField;
     private final SingleStack<List<Table>> tablesSingleStack;
-
     /**
      * here are some boolean for mark
      */
-    @Getter
-    @Setter
     private Boolean readingTotal = false;
-    @Getter
-    @Setter
     private Boolean prepareSelectTotal = false;
-    @Getter
-    @Setter
     private Boolean selectingOriginal = false;
-
     /**
      * here is information for doing page
      */
-    @Getter
     private PageInfo pageInfo;
-
 
     PageHelper() {
         tablesSingleStack = new SingleStack(new ArrayList<Table>());
@@ -59,11 +48,11 @@ public class PageHelper {
         selectSingleStack = new SingleStack(DSL.selectCount());
     }
 
-    public synchronized static final void startPage(Long pageSize, Long currentPage) {
+    public static synchronized void startPage(Long pageSize, Long currentPage) {
         AdvisorContext.startPage(pageSize, currentPage);
     }
 
-    public synchronized static final Page pageInfo() {
+    public static synchronized Page endPage() {
         PageInfo pageInfo = AdvisorContext.getPageHelper().getPageInfo();
         AdvisorContext.destroyContext();
         return BeanUtil.copyProperties(pageInfo, Page.class);
@@ -139,12 +128,10 @@ public class PageHelper {
                     conditions.add(queryPart);
                 }
             }
-
             /* join every part in dsl */
             joinTable(tables, joinTable);
             joinWhere(conditions);
             joinHaving();
-
             //ready to execute the word
             prepareSelectTotal = false;
             readingTotal = true;
@@ -158,24 +145,22 @@ public class PageHelper {
         var flag1 = true;
         for (QueryPart condition : conditions) {
             var data = selectSingleStack.data();
-
             /* skip the KeyWord, but do some processing when 'group' or 'or' come up  */
             if (condition instanceof Keyword) {
                 var asIs = (String) Classes.getFieldValue(condition, "asIs");
                 switch (asIs) {
-                    case "or":
-                        isOr = true;
-                        break;
-                    case "group by":
-                        SelectConditionStep data1 = (SelectConditionStep) data;
-                        selectSingleStack.refresh(data1.groupBy(groupField.data()));
-                        break;
-                    default:
-                        break;
+                case "or": 
+                    isOr = true;
+                    break;
+                case "group by": 
+                    SelectConditionStep data1 = (SelectConditionStep) data;
+                    selectSingleStack.refresh(data1.groupBy(groupField.data()));
+                    break;
+                default: 
+                    break;
                 }
                 continue;
             }
-
             // When we first come here, it should be 'where' case, so it only needs once
             if (flag1) {
                 selectSingleStack.refresh(((SelectOnConditionStep) data).where(((Condition) condition)));
@@ -215,7 +200,6 @@ public class PageHelper {
     private void joinHaving() {
         var flag1 = true;
         boolean isOr = false;
-
         //Pretty same with 'joinWhere', don't need to explain again
         for (QueryPart data : havingConditionSingleStack.data()) {
             var select = selectSingleStack.data();
@@ -258,7 +242,6 @@ public class PageHelper {
      * @author: Alex
      * @since: 2021/8/4
      */
-    @Getter
     static final class PageInfo {
         private final boolean doPage;
         private Long currentPage;
@@ -287,5 +270,83 @@ public class PageHelper {
             var offset = (this.currentPage - 1) * this.pageSize;
             this.offset = offset <= 0 ? 0 : offset;
         }
+
+        //<editor-fold defaultstate="collapsed" desc="delombok">
+        @SuppressWarnings("all")
+        public boolean isDoPage() {
+            return this.doPage;
+        }
+
+        @SuppressWarnings("all")
+        public Long getCurrentPage() {
+            return this.currentPage;
+        }
+
+        @SuppressWarnings("all")
+        public Long getPageSize() {
+            return this.pageSize;
+        }
+
+        @SuppressWarnings("all")
+        public Long getTotal() {
+            return this.total;
+        }
+
+        @SuppressWarnings("all")
+        public Long getPageTotal() {
+            return this.pageTotal;
+        }
+
+        @SuppressWarnings("all")
+        public Long getOffset() {
+            return this.offset;
+        }
+        //</editor-fold>
     }
+
+    //<editor-fold defaultstate="collapsed" desc="delombok">
+    /**
+     * here are some boolean for mark
+     */
+    @SuppressWarnings("all")
+    public Boolean getReadingTotal() {
+        return this.readingTotal;
+    }
+
+    /**
+     * here are some boolean for mark
+     */
+    @SuppressWarnings("all")
+    public void setReadingTotal(final Boolean readingTotal) {
+        this.readingTotal = readingTotal;
+    }
+
+    @SuppressWarnings("all")
+    public Boolean getPrepareSelectTotal() {
+        return this.prepareSelectTotal;
+    }
+
+    @SuppressWarnings("all")
+    public void setPrepareSelectTotal(final Boolean prepareSelectTotal) {
+        this.prepareSelectTotal = prepareSelectTotal;
+    }
+
+    @SuppressWarnings("all")
+    public Boolean getSelectingOriginal() {
+        return this.selectingOriginal;
+    }
+
+    @SuppressWarnings("all")
+    public void setSelectingOriginal(final Boolean selectingOriginal) {
+        this.selectingOriginal = selectingOriginal;
+    }
+
+    /**
+     * here is information for doing page
+     */
+    @SuppressWarnings("all")
+    public PageInfo getPageInfo() {
+        return this.pageInfo;
+    }
+    //</editor-fold>
 }
