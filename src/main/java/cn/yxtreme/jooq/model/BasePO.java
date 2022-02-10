@@ -14,7 +14,7 @@ public class BasePO {
     private Integer version;
 
 
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     public static abstract class BasePOBuilder<C extends BasePO, B extends BasePO.BasePOBuilder<C, B>> {
         @SuppressWarnings("all")
@@ -226,5 +226,4 @@ public class BasePO {
     public String toString() {
         return "BasePO(id=" + this.getId() + ", deleted=" + this.getDeleted() + ", createdAt=" + this.getCreatedAt() + ", updatedAt=" + this.getUpdatedAt() + ", version=" + this.getVersion() + ")";
     }
-    //</editor-fold>
 }

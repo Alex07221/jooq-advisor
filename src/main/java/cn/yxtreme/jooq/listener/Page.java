@@ -9,7 +9,7 @@ public final class Page {
     private long total;
     private long pageTotal;
 
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     public long getCurrentPage() {
         return this.currentPage;
@@ -55,5 +55,5 @@ public final class Page {
     public void setPageTotal(final long pageTotal) {
         this.pageTotal = pageTotal;
     }
-    //</editor-fold>
+    
 }

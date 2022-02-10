@@ -18,10 +18,10 @@ import static org.jooq.codegen.GeneratorStrategy.Mode;
  */
 @SuppressWarnings("all")
 public class YujiGenerator extends JavaGenerator {
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(YujiGenerator.class);
-    //</editor-fold>
+    
     private static final Class<BasePO> BASE_TABLE_CLASS = BasePO.class;
     private static final List<String> BASE_TABLE_FIELD_NAME = Streams.streamToList(Arrays.stream(BASE_TABLE_CLASS.getDeclaredFields()), e -> e, e -> e.getName());
     private static boolean isPojo = false;

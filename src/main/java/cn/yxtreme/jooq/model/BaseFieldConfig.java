@@ -44,7 +44,7 @@ public class BaseFieldConfig {
         }
 
 
-        //<editor-fold defaultstate="collapsed" desc="delombok">
+        
         @SuppressWarnings("all")
         public static class InsertFieldBuilder {
             @SuppressWarnings("all")
@@ -142,7 +142,7 @@ public class BaseFieldConfig {
             this.version = version;
             this.deleted = deleted;
         }
-        //</editor-fold>
+        
     }
 
 
@@ -156,7 +156,7 @@ public class BaseFieldConfig {
         }
 
 
-        //<editor-fold defaultstate="collapsed" desc="delombok">
+        
         @SuppressWarnings("all")
         public static class UpdateFieldBuilder {
             @SuppressWarnings("all")
@@ -212,13 +212,13 @@ public class BaseFieldConfig {
             this.updated = updated;
             this.version = version;
         }
-        //</editor-fold>
+        
     }
 
 
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     public static class DeleteField {
-    //</editor-fold>
+    
         private String deleted;
 
         private DeleteField() {
@@ -226,7 +226,7 @@ public class BaseFieldConfig {
         }
 
 
-        //<editor-fold defaultstate="collapsed" desc="delombok">
+        
         @SuppressWarnings("all")
         public static class DeleteFieldBuilder {
             @SuppressWarnings("all")
@@ -268,10 +268,10 @@ public class BaseFieldConfig {
         public DeleteField(final String deleted) {
             this.deleted = deleted;
         }
-        //</editor-fold>
+        
     }
 
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     public InsertField getInsertField() {
         return this.insertField;
@@ -301,5 +301,5 @@ public class BaseFieldConfig {
     public void setDeleteField(final DeleteField deleteField) {
         this.deleteField = deleteField;
     }
-    //</editor-fold>
+    
 }

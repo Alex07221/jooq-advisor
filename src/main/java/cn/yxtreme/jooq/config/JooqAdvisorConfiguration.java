@@ -75,11 +75,8 @@ public class JooqAdvisorConfiguration {
                     break;
                 default: 
                     break;
-                //<editor-fold defaultstate="collapsed" desc="delombok">
                 }
-                //</editor-fold>
             }
-            //<editor-fold defaultstate="collapsed" desc="delombok">
             configuration.set(ArrayUtil.toArray(visits, VisitListenerProvider.class));
             configuration.set(ArrayUtil.toArray(executes, ExecuteListenerProvider.class));
             configuration.set(ArrayUtil.toArray(records, RecordListenerProvider.class));
@@ -89,14 +86,14 @@ public class JooqAdvisorConfiguration {
                 System.out.println();
                 System.out.println("    _____   ___      ___      ___            _            __          _                         \n" + "   |_   _|.\'   `.  .\'   `.  .\'   `.         / \\          |  ]        (_)                        \n" + "     | | /  .-.  \\/  .-.  \\/  .-.  \\       / _ \\     .--.| | _   __  __   .--.   .--.   _ .--.  \n" + " _   | | | |   | || |   | || |   | |      / ___ \\  / /\'`\\\' |[ \\ [  ][  | ( (`\\]/ .\'`\\ \\[ `/\'`\\] \n" + "| |__\' | \\  `-\'  /\\  `-\'  /\\  `-\'  \\_   _/ /   \\ \\_| \\__/  | \\ \\/ /  | |  `\'.\'.| \\__. | | |     \n" + "`.____.\'  `.___.\'  `.___.\'  `.___.\\__| |____| |____|\'.__.;__] \\__/  [___][\\__) )\'.__.\' [___]    \n");
                 System.out.println();
-                System.out.println("version: 1.3.10");
+                System.out.println("version: 1.3.11");
                 System.out.println("see more detail to https://github.com/Alex07221/jooq-advisor/tree/master");
                 System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             }
             return configuration;
         } catch (final java.lang.Throwable $ex) {
             throw lombok.Lombok.sneakyThrow($ex);
-            //</editor-fold>
+            
         }
     }
 }

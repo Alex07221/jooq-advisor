@@ -11,10 +11,9 @@ import java.util.Objects;
  * @since: 2021/7/29
  */
 public class YuJiExecuteListener extends DefaultExecuteListener {
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(YuJiExecuteListener.class);
-    //</editor-fold>
 
     private PageHelper pageHelper() {
         return AdvisorContext.getPageHelper();

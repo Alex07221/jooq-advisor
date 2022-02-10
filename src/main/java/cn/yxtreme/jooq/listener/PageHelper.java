@@ -18,10 +18,9 @@ import java.util.List;
  * @since: 2021/7/29
  */
 public class PageHelper {
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+
     @SuppressWarnings("all")
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PageHelper.class);
-    //</editor-fold>
     /**
      * here are some stack for inquire.
      */
@@ -53,7 +52,7 @@ public class PageHelper {
         AdvisorContext.startPage(pageSize, currentPage);
     }
 
-    public static synchronized Page endPage() {
+    public static synchronized Page pageInfo() {
         PageInfo pageInfo = AdvisorContext.getPageHelper().getPageInfo();
         AdvisorContext.destroyContext();
         return BeanUtil.copyProperties(pageInfo, Page.class);
@@ -281,7 +280,7 @@ public class PageHelper {
             this.offset = offset <= 0 ? 0 : offset;
         }
 
-        //<editor-fold defaultstate="collapsed" desc="delombok">
+
         @SuppressWarnings("all")
         public boolean isDoPage() {
             return this.doPage;
@@ -311,10 +310,9 @@ public class PageHelper {
         public Long getOffset() {
             return this.offset;
         }
-        //</editor-fold>
+
     }
 
-    //<editor-fold defaultstate="collapsed" desc="delombok">
 
     /**
      * here are some boolean for mark
@@ -359,5 +357,5 @@ public class PageHelper {
     public PageInfo getPageInfo() {
         return this.pageInfo;
     }
-    //</editor-fold>
+
 }

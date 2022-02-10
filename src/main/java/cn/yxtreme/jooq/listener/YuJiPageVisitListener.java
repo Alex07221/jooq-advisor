@@ -12,10 +12,10 @@ import static org.jooq.Clause.*;
  * @since: 2021/7/28
  */
 public class YuJiPageVisitListener extends BaseVisitListener {
-    //<editor-fold defaultstate="collapsed" desc="delombok">
+    
     @SuppressWarnings("all")
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(YuJiPageVisitListener.class);
-    //</editor-fold>
+    
 
     public YuJiPageVisitListener(Class<?> tablesClass) {
         super(tablesClass);
