@@ -8,6 +8,7 @@ import org.jooq.impl.DSL;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * It's advice about auto make pagination
@@ -17,6 +18,7 @@ import java.util.List;
  * @author: Alex
  * @since: 2021/7/29
  */
+@SuppressWarnings("all")
 public class PageHelper {
 
     @SuppressWarnings("all")
@@ -140,52 +142,24 @@ public class PageHelper {
         }
     }
 
+    private final static int SELECT_BEGIN = -1;
+    private final static int SELECT_WHERE = 1;
+    private final static int SELECT_AND = 2;
+    private final static int SELECT_OR = 3;
+    private final static int SELECT_OVER = 0;
+
     private void joinWhere(List<QueryPart> conditions) {
-        var isOr = false;
-        var flag1 = true;
-        var notMeetWhere = true;
+        int selectPart = SELECT_BEGIN;
         for (QueryPart condition : conditions) {
             var data = selectSingleStack.data();
             /* skip the KeyWord, but do some processing when 'group' or 'or' come up  */
-            if (condition instanceof Keyword) {
-                var asIs = (String) Classes.getFieldValue(condition, "asIs");
-                switch (asIs) {
-                    case "or":
-                        isOr = true;
-                        break;
-                    case "group by":
-                        SelectConditionStep data1 = (SelectConditionStep) data;
-                        selectSingleStack.refresh(data1.groupBy(groupField.data()));
-                        break;
-                    case "where":
-                        notMeetWhere = false;
-                        break;
-                    default:
-                        break;
-                }
-                continue;
-            }
-
-            // if condition "where" did not appear, skip loop
-            if (notMeetWhere) {
-                continue;
-            }
-            // When we first come here, it should be 'where' case, so it only needs once
-            if (flag1) {
-                selectSingleStack.refresh(((SelectOnConditionStep) data).where(((Condition) condition)));
-                flag1 = false;
-            } else {
-                /* When the KeyWord 'or' needs be processing... emm, well, we already know.
-                 * On the other hand, it should always be 'and'
-                 */
-                if (isOr) {
-                    selectSingleStack.refresh(((SelectConditionStep) data).or(((Condition) condition)));
-                    isOr = false;
-                } else {
-                    selectSingleStack.refresh(((SelectConditionStep) data).and(((Condition) condition)));
-                }
-            }
+            selectPart = processKey(selectPart, data);
+            selectPart = processPart(selectPart, (Condition) condition
+                    , ((SelectOnConditionStep) data)::where
+                    , ((SelectConditionStep) data)::and
+                    , ((SelectConditionStep) data)::or);
         }
+
     }
 
     private void joinTable(List<Table> tables, List<QueryPart> joinTable) {
@@ -209,31 +183,61 @@ public class PageHelper {
     private void joinHaving() {
         var flag1 = true;
         boolean isOr = false;
-        //Pretty same with 'joinWhere', don't need to explain again
+        int selectPart = SELECT_BEGIN;
+        // same as 'joinWhere'
         for (QueryPart data : havingConditionSingleStack.data()) {
             var select = selectSingleStack.data();
             if (Classes.compareTypeByName(data, "org.jooq.impl.CombinedCondition")) {
                 continue;
             }
-            if (data instanceof Keyword) {
-                var asIs = (String) Classes.getFieldValue(data, "asIs");
-                if ("or".equalsIgnoreCase(asIs)) {
-                    isOr = true;
-                }
-                continue;
-            }
-            if (flag1) {
-                selectSingleStack.refresh(((SelectHavingStep) select).having(((Condition) data)));
-                flag1 = false;
-            } else {
-                if (isOr) {
-                    selectSingleStack.refresh(((SelectHavingConditionStep) select).or(((Condition) data)));
-                    isOr = false;
-                } else {
-                    selectSingleStack.refresh(((SelectHavingConditionStep) select).and(((Condition) data)));
-                }
-            }
+            selectPart = processKey(selectPart, data);
+            selectPart = processPart(selectPart, (Condition) data
+                    , ((SelectHavingStep) select)::having
+                    , ((SelectHavingConditionStep) select)::and
+                    , ((SelectHavingConditionStep) select)::or);
         }
+    }
+
+    private int processKey(int selectPart, QueryPart data) {
+        if (data instanceof Keyword) {
+            switch ((String) Classes.getFieldValue(data, "asIs")) {
+                case "or":
+                    selectPart = SELECT_OR;
+                    break;
+                case "where":
+                    selectPart = SELECT_WHERE;
+                    break;
+                case "group by":
+                    selectSingleStack.refresh(((SelectConditionStep) data).groupBy(groupField.data()));
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        return selectPart;
+    }
+
+    private <T, R> int processPart(int selectPart, Condition data
+            , Function<Condition, Select> function
+            , Function<Condition, Select> function1
+            , Function<Condition, Select> function2) {
+        switch (selectPart) {
+            case SELECT_WHERE:
+                selectSingleStack.refresh(function.apply(data));
+                selectPart = SELECT_AND;
+                break;
+            case SELECT_AND:
+                selectSingleStack.refresh(function1.apply(data));
+                break;
+            case SELECT_OR:
+                selectSingleStack.refresh(function2.apply(data));
+                selectPart = SELECT_OVER;
+                break;
+            default:
+                break;
+        }
+        return selectPart;
     }
 
     /**
